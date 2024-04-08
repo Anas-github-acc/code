@@ -7,6 +7,9 @@ class Maxheap{
         this.maxSize = maxSize;
         this.size = 0;
         heap = new int[this.maxSize + 1];
+        for(int i = 0; i <= maxSize; i++){
+            heap[i] = -1;
+        }
         heap[0] = Integer.MAX_VALUE;
     }
 
@@ -37,22 +40,25 @@ class Maxheap{
     }
 
     public void Heapify_down(int pos){
-        if(!(pos >= (size/2) && pos <= size)){
-            if(heap[pos] < heap[leftChild(pos)] || heap[pos] < heap[rightChild(pos)]){
-                if(heap[leftChild(pos)] > heap[rightChild(pos)]){
-                    swap(pos, leftChild(pos));
-                    Heapify_down(leftChild(pos));
-                }else{
-                    swap(pos, rightChild(pos));
-                    Heapify_down(rightChild(pos));
-                }
-            }
+        int largest = pos;
+        int left = leftChild(pos);
+        int right = rightChild(pos);
+        if(left <= size && heap[left] > heap[largest]){
+            largest = left;
+        }
+        if(right <= size && heap[right] > heap[largest]){
+            largest = right;
+        }
+        if(largest != pos){
+            swap(pos, largest);
+            Heapify_down(largest);
         }
     }
 
     public int delete(){
         int popped = heap[1];
         heap[1] = heap[size--];
+        heap[size + 1] = -1;
         Heapify_down(1);
         return popped;
     }
