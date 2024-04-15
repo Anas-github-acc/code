@@ -20,27 +20,6 @@ class BinaryTree{
     BinaryTree(int data){
         this.root = new TreeNode(data);
     }
-    void insert(int data){
-        TreeNode newNode = new TreeNode(data);
-        if(this.root == null){
-            this.root = newNode;
-            return;
-        }
-        TreeNode temp = this.root;
-        while(temp != null){
-            if(temp.left == null){
-                temp.left = newNode;
-                return;
-            }
-            else if(temp.right == null){
-                temp.right = newNode;
-                return;
-            }
-            else{
-                temp = temp.left;
-            }
-        }
-    }
 
     void printInorder(TreeNode node){
         if(node == null){
@@ -67,19 +46,19 @@ class BinaryTree{
         printPreorder(node.right);
     }
 }
-class tree{
+class Tree{
     public static void main(String[] args){
         BinaryTree tree = new BinaryTree(1);
-        // tree.root.setupChild(2, 3);
-        // tree.root.left.setupChild(4, 5);
-        // tree.root.right.setupChild(6, 7);
-        // tree.root.left.left.setupChild(8, 9);
-        // tree.printInorder(tree.root);
-        // System.out.println();
-        // tree.printPostorder(tree.root);
-        // System.out.println();
-        // tree.printPreorder(tree.root);
-        // System.out.println();
+        tree.root.setupChild(2, 3);
+        tree.root.left.setupChild(4, 5);
+        tree.root.right.setupChild(6, 7);
+        tree.root.left.left.setupChild(8, 9);
+        tree.printInorder(tree.root);
+        System.out.println();
+        tree.printPostorder(tree.root);
+        System.out.println();
+        tree.printPreorder(tree.root);
+        System.out.println();
 
 
     }
