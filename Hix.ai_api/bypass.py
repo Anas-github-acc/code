@@ -3,7 +3,7 @@ import requests
 url = "https://api.hix.ai/v1/sentiment"
 headers = {
     "Content-Type": "application/json",
-    "x-api-key": "9d9ca02af88048b6b2340491a718f463"
+    "x-api-key": "YOUR_API_KEY"
 }
 data = {
     "input": "I love using the hix.ai API!",
