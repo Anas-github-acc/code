@@ -67,6 +67,21 @@ class BinarySearchTree{
         }
         return minv;
     }
+    int search(int key){
+        return searchRec(root, key);
+    }
+    int searchRec(Node root, int key){
+        if(root == null){
+            return -1;
+        }
+        else if(root.key == key){
+            return root.key;
+        }
+        if(root.key < key){
+            return searchRec(root.right, key);
+        }
+        return searchRec(root.left, key);
+    }
 }
 class BST{
     public static void main(String[] args){
@@ -83,5 +98,7 @@ class BST{
         tree.inorder();
         tree.delete(30);
         tree.inorder();
+        System.out.println(tree.search(50));
+
     }
 }
