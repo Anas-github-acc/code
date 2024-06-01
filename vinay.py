@@ -1,46 +1,24 @@
-from sys import stdin, stdout
-import math
+from sys import stdin
 input=lambda :stdin.readline()
+from collections import defaultdict
 
 def test():
-    # n:int=int(input())
-    # f=sorted(list(map(int,input().strip().split())))
-    n,x=2,1000
-    f = [1, 1]
-    if(f[0]>=x):
-        print(0)
-        return ""
-    mean_x = x
-    diff = 0
-    ans = 0
-    for i in range(1,n+1):
-        try:
-            diff += f[i] - f[0]
-        except:
-            ans+=(mean_x - f[0] + 1)*i
-            break
-
-        m = mean_x - (x-(diff))//(i+1)
-        mean_x = (x-(diff))//(i+1)
-        ans += i*m
-        print(f"m={m} mean_x={mean_x} diff={diff} ans={ans}")
-    print(ans)
-    # sf = sum(f)
-    # flag = n
-    # ans = 0
-    # loop=0
-    # while flag:
-    #     print(sf,end=" ")
-    #     sf-=(f.pop()+loop)
-    #     print(((x-sf)//flag)*flag)
-    #     ans+=((x-sf)//flag)*flag
-    #     loop += 1
-    #     flag -=1
-        # print(f"sf={sf} {flag}")
-        # print(flag)
-    # print(ans)
-
-    
+    n = int(input().strip())
+    s = input().strip()
+    e=0
+    dic = defaultdict(int)
+    t=0
+    for i in range(n):
+        if s[i] == '0':
+            t-=1
+        else:
+            t+=1
+        if t == 0:
+            e+=1
+        if t in dic:
+            e+=dic[t]
+        dic[t]+=1
+    print(e+n*(n+1)//2)
 
 for _ in range(int(input())):
     test()

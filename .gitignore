@@ -6,3 +6,13 @@ tempCodeRunnerFile.py
 Matlab
 &*
 WhatsApp_api
+copilotHelp.*
+Hixai_api
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+.pytest_cache
+.pytest_cache/
+vinay.*
+vinay2.*

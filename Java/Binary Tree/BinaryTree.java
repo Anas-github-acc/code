@@ -46,7 +46,7 @@ class BinaryTree{
         printPreorder(node.right);
     }
 }
-class Tree{
+class BinaryTree{
     public static void main(String[] args){
         BinaryTree tree = new BinaryTree(1);
         tree.root.setupChild(2, 3);
