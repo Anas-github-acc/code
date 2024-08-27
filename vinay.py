@@ -1,24 +1,22 @@
-from sys import stdin
-input=lambda :stdin.readline()
-from collections import defaultdict
+def haming_distance(x:str,y:str):
+    count=0
+    for i in range(0,len(x)):
+        if x[i]!=y[i]:
+            count+=1
+    return count
 
-def test():
-    n = int(input().strip())
-    s = input().strip()
-    e=0
-    dic = defaultdict(int)
-    t=0
-    for i in range(n):
-        if s[i] == '0':
-            t-=1
-        else:
-            t+=1
-        if t == 0:
-            e+=1
-        if t in dic:
-            e+=dic[t]
-        dic[t]+=1
-    print(e+n*(n+1)//2)
+def testcase():
+    n,m = list(map(int, input().split()))
+    a=input().strip()
+    b=input().strip()
+    min_ham = 101
+    for i in range(0,n-m+1):
+        dis = haming_distance(a[i:i+m],b)
+        min_ham = min(min_ham,dis)
+    print(min_ham)
 
-for _ in range(int(input())):
-    test()
+    
+t:int=int(input())
+while(t):
+    t-=1
+    testcase()
