@@ -1,22 +1,38 @@
-def haming_distance(x:str,y:str):
-    count=0
-    for i in range(0,len(x)):
-        if x[i]!=y[i]:
-            count+=1
-    return count
+from sys import stdin, stdout
+input=lambda :stdin.readline()
 
-def testcase():
-    n,m = list(map(int, input().split()))
-    a=input().strip()
-    b=input().strip()
-    min_ham = 101
-    for i in range(0,n-m+1):
-        dis = haming_distance(a[i:i+m],b)
-        min_ham = min(min_ham,dis)
-    print(min_ham)
+def test():
+    n = int(input())
+    a = [i for i in input().strip()]
+
+    reoccur=0
+    for i in range(n):
+        if(i<n-1 and a[i] == a[i+1]):
+            reoccur+=1
+
+    rndScore = 0
+    for i in range(n):
+        if(i<n-1 and a[i] != a[i+1]):
+            rndScore+=1
+
+    score=0
+    f=0
+    for i in range(reoccur):
+        if(rndScore==0 or rndScore==1):
+            score+=rndScore
+            break
+        f+=1
+        if(f<3):
+            score+=rndScore
+            continue
+        f=0
+        rndScore-=1
+    
+    print(score)
 
     
-t:int=int(input())
-while(t):
-    t-=1
-    testcase()
+    
+    
+
+for _ in range(int(input())):
+    test()
