@@ -1,29 +1,74 @@
 from sys import stdin, stdout
 input=lambda :stdin.readline()
 
-prime = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199}
-def is_prime(n):
-    return prime[n]
+from collections import Counter, defaultdict
+
+def nCr(n, r):
+    if n<r:
+        return 0
+    if r==0:
+        return 1
+    if r==1:
+        return n
+    if r>n-r:
+        r = n-r
+    ans = 1
+    for i in range(1,r+1):
+        ans = ans*(n-r+i)//i
+    return ans
+
+# def solve(counter):
+#     zeros = counter[0]
+
+#     counter = dict(sorted(counter.items(), key=lambda item: item[1],reverse=True))
+
+#     max_value = list(counter.values())[0]
+#     if(list(counter.keys())[0] == 0 and len(counter)>1):
+#         max_value+=list(counter.values())[1]
+#     elif(zeros>0 and len(counter)>1):
+#         max_value+=zeros
+        
+#     ans = nCr(max_value,2)
+#     for i in range(1, len(counter)):
+#         if (i==1 and list(counter.keys())[0] == 0):
+#             continue
+#         if(list(counter.values())[i] > 1 and list(counter.keys())[i] != 0):
+#             ans+=nCr(list(counter.values())[i],2)
+#     return ans
+
+# equal pairs ---
+# def test():
+#     n=int(input())
+#     a=list(map(int, input().split()))
+
+#     counter = Counter(a)
+    
+#     print(solve(counter))
+
+# equal pairs (hard) ---
+# def test():
+#     n=int(input())
+#     dic = defaultdict(int)
+#     dic[0] = n
+#     for _ in range(n):
+#         x,y = list(map(int, input().split()))
+#         dic[y]+=1
+#         dic[0]-=1
+#         print(solve(dic), end=' ')
+#     print()
 
 def test():
-    n:int = int(input())
+    x,y = list(map(int, input().split()))
     a = list(map(int, input().split()))
+    for _ in range(y):
+        mina = min(a)
+        maxa = max(a)
+        a.remove(mina)
+        a.remove(maxa)
+        a.append(mina+maxa)
+        # print(a)
+    print(*a)
 
-    diff = [0] * n-1
-    for i in range(n-1):
-        diff[i] = a[i+1] - a[i]
-
-    for i in range(n):
-        # for j in range(i+1, n):
-        #     if not is_prime(a[i] + a[j]):
-        #         print(i+1, j+1)
-        #         return    
-        x = a[i]+diff[i]
-        if not is_prime(x):
-            print(i, i+1)
-            return
-    print(-1)
-    return
 
 for _ in range(int(input())):
     test()

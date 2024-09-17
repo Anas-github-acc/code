@@ -1,38 +1,39 @@
 from sys import stdin, stdout
+from collections import defaultdict
 input=lambda :stdin.readline()
 
+
 def test():
-    n = int(input())
-    a = [i for i in input().strip()]
-
-    reoccur=0
+    n,m = map(int, input().split())
+    matrix = [[0]*m for _ in range(n)]
     for i in range(n):
-        if(i<n-1 and a[i] == a[i+1]):
-            reoccur+=1
+        matrix[i] = list(map(int, input().split()))
 
-    rndScore = 0
+    A=[[]*n]
+    K=[[]*n]
+
     for i in range(n):
-        if(i<n-1 and a[i] != a[i+1]):
-            rndScore+=1
+        for j in range(m):
+            if matrix[i][j] == 1:
+                A[i].append(j)
+            elif matrix[i][j] == 2:
+                K[i].append(j)
+            elif matrix[i][j] == 3:
+                A[i].append(j)
+                K[i].append(j)
 
-    score=0
-    f=0
-    for i in range(reoccur):
-        if(rndScore==0 or rndScore==1):
-            score+=rndScore
-            break
-        f+=1
-        if(f<3):
-            score+=rndScore
-            continue
-        f=0
-        rndScore-=1
+    # print(A, K)
     
-    print(score)
+    for y1 in range(m):
+      val=0
+      for y2 in range(len(A[0])):
+          val+=abs(A[0][y2]-y1)
+      for y2 in range(len(K[0])):
+          val-=abs(K[0][y2]-y1)
+      print(abs(val), end=" ")
+    print()
+            
 
-    
-    
-    
 
 for _ in range(int(input())):
     test()
