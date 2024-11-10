@@ -1,39 +1,50 @@
-from sys import stdin, stdout
-from collections import defaultdict
-input=lambda :stdin.readline()
+from collections import deque
 
 
-def test():
-    n,m = map(int, input().split())
-    matrix = [[0]*m for _ in range(n)]
-    for i in range(n):
-        matrix[i] = list(map(int, input().split()))
-
-    A=[[]*n]
-    K=[[]*n]
-
-    for i in range(n):
-        for j in range(m):
-            if matrix[i][j] == 1:
-                A[i].append(j)
-            elif matrix[i][j] == 2:
-                K[i].append(j)
-            elif matrix[i][j] == 3:
-                A[i].append(j)
-                K[i].append(j)
-
-    # print(A, K)
-    
-    for y1 in range(m):
-      val=0
-      for y2 in range(len(A[0])):
-          val+=abs(A[0][y2]-y1)
-      for y2 in range(len(K[0])):
-          val-=abs(K[0][y2]-y1)
-      print(abs(val), end=" ")
-    print()
-            
 
 
-for _ in range(int(input())):
-    test()
+def min_operations(x, y):
+    if x == y:
+        return 0
+
+    # Queue for BFS, initialized with the starting number x and 0 steps
+    queue = deque([(x, 0)])
+    visited = set([x])
+
+    # BFS loop
+    while queue:
+        current, steps = queue.popleft()
+
+        # Generate possible next states
+        # If current can be halved
+        if current % 2 == 0:
+            next_state = current // 2
+            if next_state == y:
+                return steps + 1
+            if next_state not in visited:
+                visited.add(next_state)
+                queue.append((next_state, steps + 1))
+
+        # If current can be divided by 3
+        if current % 3 == 0:
+            next_state = current // 3
+            if next_state == y:
+                return steps + 1
+            if next_state not in visited:
+                visited.add(next_state)
+                queue.append((next_state, steps + 1))
+
+        # Always consider subtracting 1
+        next_state = current - 1
+        if next_state == y:
+            return steps + 1
+        if next_state not in visited:
+            visited.add(next_state)
+            queue.append((next_state, steps + 1))
+
+    return -1
+
+T = int(input())
+for _ in range(T):
+    x, y = map(int, input().split())
+    print(min_operations(x, y))

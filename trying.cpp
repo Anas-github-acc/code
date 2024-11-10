@@ -1,38 +1,32 @@
-#include <bits/stdc++.h>
-
-#define ll long long int
+#include<iostream>
+#include<vector>
 using namespace std;
+int main(){
+    int n;
+    cin>>n;
 
-// Kadane's Algorithm
-int maxSubarray(int arr[], int n){
-  int maxSoFar=INT_MIN, maxEndingHere=0;
-  cout<<"n = "<<n<<endl;
-  for(int i=0;i<n;i++){
-    maxEndingHere=maxEndingHere+arr[i];
-    if( maxSoFar<maxEndingHere){
-      maxSoFar=maxEndingHere; 
+    vector<int> arr(n);
+    for(int i=0;i<n;i++){
+            cin>>arr[i];
     }
-    if(maxEndingHere<0){
-      maxEndingHere=0;
-    }
-    cout<<"--> "<< maxEndingHere<<endl;
-  }
-  return maxSoFar;
-}
 
-int main() {
-    int arr[3] = {3,-1,4};
-    int size = sizeof(arr) / sizeof(arr[0]);
-    cout<<maxSubarray(arr, size)<<endl;
+   for(int i=arr.size()-1;i>=0;i--){
+        for(int j=i-1;j>=0;j--){
+            if(arr[i]==arr[j]){
+                arr.erase(arr.begin() + j);
+                i--; 
+
+            }
+
+        }
+
+
+   }
+   cout<<arr.size()<<endl;
+
+   for(int i=0;i<arr.size();i++){
+            cout<<arr[i]<<" ";
+    }
+ 
     return 0;
 }
-
-// int main() {
-//     ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
-//     ll t;
-//     cin >> t;
-//     while(t--) {
-//         test();
-//     }
-//     return 0;
-// }
